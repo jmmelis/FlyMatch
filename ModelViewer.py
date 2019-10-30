@@ -618,8 +618,8 @@ class ModelViewer(pg.GraphicsWindow):
 			theta = np.arccos(np.absolute(np.dot(L2_now[0:3],L2_prev[0:3]))/(np.linalg.norm(L2_now[0:3])*np.linalg.norm(L2_prev[0:3])))
 			q_update = np.array([np.cos(theta/2.0),e_rot[0]*np.sin(theta/2.0),e_rot[1]*np.sin(theta/2.0),e_rot[2]*np.sin(theta/2.0)])
 			q_prev = self.state_L[0:4]
-			#q_now = self.quat_multiply(q_prev,q_update)
-			q_now = self.quat_multiply(q_update,q_prev)
+			q_now = self.quat_multiply(q_prev,q_update)
+			#q_now = self.quat_multiply(q_update,q_prev)
 			self.state_L[0:4] = q_now
 		elif point_nr == 2:
 			# translation R0
@@ -634,8 +634,8 @@ class ModelViewer(pg.GraphicsWindow):
 			theta = np.arccos(np.absolute(np.dot(R2_now[0:3],R2_prev[0:3]))/(np.linalg.norm(R2_now[0:3])*np.linalg.norm(R2_prev[0:3])))
 			q_update = np.array([np.cos(theta/2.0),e_rot[0]*np.sin(theta/2.0),e_rot[1]*np.sin(theta/2.0),e_rot[2]*np.sin(theta/2.0)])
 			q_prev = self.state_R[0:4]
-			#q_now = self.quat_multiply(q_prev,q_update)
-			q_now = self.quat_multiply(q_update,q_prev)
+			q_now = self.quat_multiply(q_prev,q_update)
+			#q_now = self.quat_multiply(q_update,q_prev)
 			self.state_R[0:4] = q_now
 		self.add_wing_contours()
 
@@ -677,6 +677,7 @@ class ModelViewer(pg.GraphicsWindow):
 			# Create the manual tracking folder
 			os.chdir(self.output_folder)
 			os.mkdir(self.mov_folder)
+			os.chdir(self.mov_folder)
 			for j in range(self.N_cam):
 				dir_name = 'cam_' + str(j+1)
 				os.mkdir(dir_name)
