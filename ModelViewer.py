@@ -318,12 +318,12 @@ class ModelViewer(pg.GraphicsWindow):
 			self.w2c_matrices.append(W2C_mat)
 			self.c2w_matrices.append(C2W_mat)
 			uv_trans = np.zeros((3,1))
-			if self.c_params.shape[0] ==  16:
-				uv_trans[0] = (self.c_params[11,i]-self.c_params[13,i])/2.0-self.c_params[14,i]
-				uv_trans[1] = (self.c_params[10,i]-self.c_params[12,i])/2.0-self.c_params[15,i]
-			else:
-				uv_trans[0] = (self.c_params[11,i]-self.c_params[13,i])/2.0
-				uv_trans[1] = (self.c_params[10,i]-self.c_params[12,i])/2.0
+			#if self.c_params.shape[0] ==  16:
+			#	uv_trans[0] = (self.c_params[11,i]-self.c_params[13,i])/2.0-self.c_params[14,i]
+			#	uv_trans[1] = (self.c_params[10,i]-self.c_params[12,i])/2.0-self.c_params[15,i]
+			#else:
+			uv_trans[0] = (self.c_params[11,i]-self.c_params[13,i])/2.0
+			uv_trans[1] = (self.c_params[10,i]-self.c_params[12,i])/2.0
 			self.uv_shift.append(uv_trans)
 
 	def set_u_cam_1_spin(self,spin_in):
@@ -334,7 +334,7 @@ class ModelViewer(pg.GraphicsWindow):
 		self.u_cam_1_spin.valueChanged.connect(self.set_u_shift_cam_1)
 
 	def set_u_shift_cam_1(self,u_in):
-		self.uv_shift[0][0] -= u_in
+		self.uv_shift[0][0] = (self.c_params[11,0]-self.c_params[13,0])/2.0-u_in
 		self.add_wing_contours()
 		self.update_graphs()
 
@@ -346,7 +346,7 @@ class ModelViewer(pg.GraphicsWindow):
 		self.v_cam_1_spin.valueChanged.connect(self.set_v_shift_cam_1)
 
 	def set_v_shift_cam_1(self,v_in):
-		self.uv_shift[0][1] -= v_in
+		self.uv_shift[0][1] = (self.c_params[10,0]-self.c_params[12,0])/2.0-v_in
 		self.add_wing_contours()
 		self.update_graphs()
 
@@ -358,7 +358,7 @@ class ModelViewer(pg.GraphicsWindow):
 		self.u_cam_2_spin.valueChanged.connect(self.set_u_shift_cam_2)
 
 	def set_u_shift_cam_2(self,u_in):
-		self.uv_shift[1][0] -= u_in
+		self.uv_shift[1][0] = (self.c_params[11,1]-self.c_params[13,1])/2.0-u_in
 		self.add_wing_contours()
 		self.update_graphs()
 
@@ -370,7 +370,7 @@ class ModelViewer(pg.GraphicsWindow):
 		self.v_cam_2_spin.valueChanged.connect(self.set_v_shift_cam_2)
 
 	def set_v_shift_cam_2(self,v_in):
-		self.uv_shift[1][1] -= v_in
+		self.uv_shift[1][1] = (self.c_params[10,1]-self.c_params[12,1])/2.0-v_in
 		self.add_wing_contours()
 		self.update_graphs()
 
@@ -382,7 +382,7 @@ class ModelViewer(pg.GraphicsWindow):
 		self.u_cam_3_spin.valueChanged.connect(self.set_u_shift_cam_3)
 
 	def set_u_shift_cam_3(self,u_in):
-		self.uv_shift[2][0] -= u_in
+		self.uv_shift[2][0] = (self.c_params[11,2]-self.c_params[13,2])/2.0-u_in
 		self.add_wing_contours()
 		self.update_graphs()
 
@@ -394,7 +394,7 @@ class ModelViewer(pg.GraphicsWindow):
 		self.v_cam_3_spin.valueChanged.connect(self.set_v_shift_cam_3)
 
 	def set_v_shift_cam_3(self,v_in):
-		self.uv_shift[2][1] -= v_in
+		self.uv_shift[2][1] = (self.c_params[10,2]-self.c_params[12,2])/2.0-v_in
 		self.add_wing_contours()
 		self.update_graphs()
 
